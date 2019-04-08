@@ -17,5 +17,10 @@
 			<ref bean="thirdToDoListStrategy"/>
 		</list>
 	</property>
+	<!-- for setter -->
+	<property name="doListStrategy" ref="secondToDoListStrategy"></property>
+	<constructor-arg>
+		<bean class="pl.spring.exercise.xmlconfig.service.SecondToDoListStrategy"></bean>
+	</constructor-arg>
 </bean>
 </beans>

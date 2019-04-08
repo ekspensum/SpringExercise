@@ -7,7 +7,8 @@ public class MainClass {
 
         public static void main(String[] args) {
                 // TODO Auto-generated method stub
-                ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+                @SuppressWarnings("resource")
+				ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
                 context.getBean("bookServiceImpl", BookService.class).getAllBooks();
         }
 }

@@ -13,9 +13,12 @@ public class RunnerClassXmlConfig {
         public static void main(String[] args) {
 
                 @SuppressWarnings("resource")
-                ApplicationContext context = new ClassPathXmlApplicationContext("/pl/spring/exercise/xmlconfig/beans.xml");
+                ApplicationContext context = new ClassPathXmlApplicationContext("/pl/spring/exercise/xmlconfig/config/beans.xml");
                 TaskService bean = context.getBean(TaskService.class);
 
+                List<Task> concreteList = bean.getListStrtegy();
+                System.out.println(concreteList);                
+                
                 List<Task> list0 = bean.findCurrentToDoList(0);
                 System.out.println(list0);
                 List<Task> list1 = bean.findCurrentToDoList(1);

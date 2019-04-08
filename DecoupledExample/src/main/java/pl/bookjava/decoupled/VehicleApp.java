@@ -12,7 +12,8 @@ public class VehicleApp {
 
 //              new ClassPathXmlApplicationContext("beans.xml").getBean("vehicleService", VehicleService.class).driver();
 
-                ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+                @SuppressWarnings("resource")
+				ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
                 context.getBean("vehicleService", VehicleService.class).driver();
         }
 

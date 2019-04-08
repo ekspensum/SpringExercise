@@ -6,13 +6,20 @@ import pl.spring.exercise.xmlconfig.model.Task;
 
 public class TaskService {
 
-        private List<ToDoListStrategy> doListStrategies;
+		private ToDoListStrategy doListStrategy;
+	
+		private List<ToDoListStrategy> doListStrategies;
 
         public TaskService() {
                 super();
         }
 
-        public TaskService(List<ToDoListStrategy> doListStrategies) {
+        public TaskService(ToDoListStrategy doListStrategy) {
+			super();
+			this.doListStrategy = doListStrategy;
+		}
+
+		public TaskService(List<ToDoListStrategy> doListStrategies) {
                 super();
                 this.doListStrategies = doListStrategies;
         }
@@ -24,5 +31,13 @@ public class TaskService {
         public List<Task> findCurrentToDoList(int idStrategy){
                 return doListStrategies.get(idStrategy).creteToDoList();
         }
+        
+        public List<Task> getListStrtegy(){
+        	return doListStrategy.creteToDoList();
+        }
+
+		public void setDoListStrategy(ToDoListStrategy doListStrategy) {
+			this.doListStrategy = doListStrategy;
+		}
 }
 

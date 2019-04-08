@@ -3,6 +3,7 @@ package pl.spring.exercise.javaconfig.config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import pl.spring.exercise.javaconfig.service.DefaultToDoListStrategy;
 import pl.spring.exercise.javaconfig.service.EisenhowerToDoListStrategy;
@@ -24,18 +25,21 @@ public class ConfigApp {
         }
 
         @Bean
+        @Order(1)
 //      @Qualifier
         public ToDoListStrategy eisenhowerToDoListStrategy() {
                 return new EisenhowerToDoListStrategy();
         }
 
         @Bean
+        @Order(2)
 //      @Qualifier
         public ToDoListStrategy defaultToDoListStrategy() {
                 return new DefaultToDoListStrategy();
         }
 
         @Bean
+        @Order(3)
         @Qualifier
         public ToDoListStrategy randomToDoListStrategy() {
                 return new RandomToDoListStrategy();
