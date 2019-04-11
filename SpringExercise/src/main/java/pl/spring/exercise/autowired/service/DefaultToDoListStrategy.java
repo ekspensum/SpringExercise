@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import pl.spring.exercise.autowired.config.ToDoListQualifier;
+import pl.spring.exercise.autowired.config.ToDoListType;
 import pl.spring.exercise.autowired.model.Task;
 
 @Service
-@Qualifier("default")
+@ToDoListQualifier(strategy=ToDoListType.DEFAULT)
 @Order(3)
 public class DefaultToDoListStrategy implements ToDoListStrategy {
 

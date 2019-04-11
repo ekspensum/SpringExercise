@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-
+<context:component-scan base-package="pl.spring.exercise.xmlconfig.config" />
 <bean id="firstToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.FirstToDoListStrategy"></bean>
 <bean id="secondToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.SecondToDoListStrategy"></bean>
 <bean id="thirdToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.ThirdToDoListStrategy"></bean>
@@ -23,4 +23,7 @@
 		<bean class="pl.spring.exercise.xmlconfig.service.SecondToDoListStrategy"></bean>
 	</constructor-arg>
 </bean>
+
+<context:property-placeholder location="classpath:/pl/spring/exercise/xmlconfig/config/service-config.properties"/>
+
 </beans>

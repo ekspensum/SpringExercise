@@ -7,11 +7,12 @@ import java.util.Random;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import pl.spring.exercise.autowired.config.ToDoListQualifier;
+import pl.spring.exercise.autowired.config.ToDoListType;
 import pl.spring.exercise.autowired.model.Task;
 
-
-
 @Service
+@ToDoListQualifier(strategy=ToDoListType.RANDOM)
 @Order(1)
 public class RandomToDoListStrategy implements ToDoListStrategy {
 

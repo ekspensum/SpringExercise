@@ -25,6 +25,8 @@ public class RunnerClassXmlConfig {
                 System.out.println(list1);
                 List<Task> list2 = bean.findCurrentToDoList(2);
                 System.out.println(list2);
+                
+                System.out.println(bean.getServiceId());
         }
 
 }

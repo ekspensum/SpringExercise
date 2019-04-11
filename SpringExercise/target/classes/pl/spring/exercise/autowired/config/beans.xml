@@ -3,8 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<context:component-scan base-package="pl.spring.exercise.autowired.service"></context:component-scan>
-	<context:property-placeholder location="classpath:/pl/spring/exercise/autowired/config/config.properties"/>
+<bean id="randomToDoListStrategy" scope="prototype" class="pl.spring.exercise.autowired.service.RandomToDoListStrategy">
+	<qualifier value="random"></qualifier>
+</bean>
+
 </beans>

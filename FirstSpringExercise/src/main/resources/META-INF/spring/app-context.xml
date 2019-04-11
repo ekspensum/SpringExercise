@@ -10,7 +10,9 @@
 	<context:component-scan base-package="pl.springapp.tasks" />
 
 <bean id="exampleService" class="pl.springapp.tasks.ExampleService"></bean>
-<!-- <bean class="pl.springapp.tasks.TaskService"></bean> -->
+<bean id="taskService" class="pl.springapp.tasks.TaskService">
+	<property name="taskService" value="taskService#22222"></property>
+</bean>
 <bean id="otherService" class="pl.springapp.tasks.OtherService" scope="prototype"></bean>
 
 </beans>
