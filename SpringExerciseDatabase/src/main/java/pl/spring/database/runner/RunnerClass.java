@@ -32,9 +32,9 @@ public class RunnerClass {
 
 		TaskService beanTaskService = context.getBean(TaskService.class);
 //		beanTaskService.addTask("subject2", LocalDateTime.now().plusHours(2), LocalDateTime.now().plusHours(5));
-		beanTaskService.addTaskSeconApproach("subject2", LocalDateTime.now().plusHours(2), LocalDateTime.now().plusHours(5));
-		beanTaskService.getTask(6);
-		
+//		beanTaskService.addTaskSeconApproach("subjectSeconApproach", LocalDateTime.now().plusHours(1), LocalDateTime.now().plusHours(13));
+//		beanTaskService.getTask(6);
+		beanTaskService.getAllTasks();
 		
 		context.close();
 	}
