@@ -16,11 +16,11 @@ public class RunnerClassAutowired {
 
 	public static void main(String[] args) {
 		
-		@SuppressWarnings("resource")
 		ApplicationContext context = new AnnotationConfigApplicationContext(ConfigApp.class);
 		TaskService taskService = context.getBean(TaskService.class);
 		List<Task> list1 = taskService.findCurrentToDoList();
 		System.out.println(list1);
+		((AnnotationConfigApplicationContext) context).close();
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context2 = new ClassPathXmlApplicationContext("/pl/spring/exercise/autowired/config/app-context.xml");
@@ -37,9 +37,10 @@ public class RunnerClassAutowired {
 		
 		System.out.println(bean.getServiceId());
 		
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(TaskConfig.class);
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(TaskConfig.class);
 		SecondTaskService bean2 = applicationContext.getBean(SecondTaskService.class);
 		System.out.println(bean2.findCurrentToDoList());
+		applicationContext.close();
 	}
 
 }

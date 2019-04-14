@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.core.annotation.Order;
+
 import pl.spring.exercise.javaconfig.model.Task;
 
+@Order(3)
 public class RandomToDoListStrategy implements ToDoListStrategy {
 
         public List<Task> creteToDoList() {

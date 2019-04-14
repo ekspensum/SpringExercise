@@ -28,6 +28,9 @@ public class RunnerClassJavaConfig {
 
                 List<Task> toDoListArray2 = taskService.findCurrentToDoListArray(2);
                 System.out.println("Second approach 2 "+toDoListArray2);
+
+                List<Task> toDoListOtherStrategy = taskService.getOtherStrategy().creteToDoListOtherStrategy();
+                System.out.println(toDoListOtherStrategy);
         }
 
 }

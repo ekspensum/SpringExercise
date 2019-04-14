@@ -28,7 +28,7 @@ public class TaskService {
 	@ToDoListQualifier(strategy=ToDoListType.DEFAULT)
 	private ToDoListStrategy doListStrategy;
 
-	@Autowired
+//	@Autowired
 	private ToDoListStrategy[] doListStrategyArray;
 
 	public TaskService() {
@@ -41,7 +41,7 @@ public class TaskService {
 		this.doListStrategy = doListStrategy;
 	}
 
-//    @Autowired
+    @Autowired
 	public TaskService(ToDoListStrategy[] doListStrategyArray) {
 		super();
 		this.doListStrategyArray = doListStrategyArray;
@@ -63,7 +63,7 @@ public class TaskService {
 		return doListStrategyArray[idStrategy].creteToDoList();
 	}
 
-	@Autowired
+//	@Autowired
 	public void setDoListStrategyArray(ToDoListStrategy[] doListStrategyArray) {
 		this.doListStrategyArray = doListStrategyArray;
 	}

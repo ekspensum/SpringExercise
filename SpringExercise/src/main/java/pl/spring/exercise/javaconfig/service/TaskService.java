@@ -10,51 +10,61 @@ import pl.spring.exercise.javaconfig.model.Task;
 
 public class TaskService {
 
-//      @Autowired
-//      @Qualifier
-        private ToDoListStrategy doListStrategy;
+//	@Autowired
+	private ToDoListStrategy doListStrategy;
 
-        @Autowired
-        @Qualifier("array")
-        private ToDoListStrategy [] doListStrategyArray;
+//	@Autowired
+	private OtherStrategy otherStrategy;
 
-        public TaskService() {
-                super();
-        }
+	@Autowired
+	private ToDoListStrategy[] doListStrategyArray;
 
-//      @Autowired(required = true)
-        public TaskService(ToDoListStrategy doListStrategy) {
-                super();
-                this.doListStrategy = doListStrategy;
-        }
+	public TaskService() {
+		super();
+	}
 
-//      @Autowired
-        public TaskService(ToDoListStrategy[] doListStrategyArray) {
-                super();
-                this.doListStrategyArray = doListStrategyArray;
-        }
+	public TaskService(ToDoListStrategy doListStrategy) {
+		super();
+		this.doListStrategy = doListStrategy;
+	}
 
-        public List<Task> findCurrentToDoList(){
-                return doListStrategy.creteToDoList();
-        }
+	public TaskService(ToDoListStrategy[] doListStrategyArray) {
+		super();
+		this.doListStrategyArray = doListStrategyArray;
+	}
 
-        @Autowired
-        @Qualifier
-        public void setDoListStrategy(ToDoListStrategy doListStrategy) {
-                this.doListStrategy = doListStrategy;
-        }
+	public TaskService(OtherStrategy otherStrategy) {
+		super();
+		this.otherStrategy = otherStrategy;
+	}
 
-        public List<Task> findCurrentToDoListArray(int idStrategy){
-                return doListStrategyArray[idStrategy].creteToDoList();
-        }
+	public List<Task> findCurrentToDoList() {
+		return doListStrategy.creteToDoList();
+	}
 
-//      @Autowired
-//      @Qualifier("array")
-//      public void setDoListStrategyArray(ToDoListStrategy[] doListStrategyArray) {
-//              this.doListStrategyArray = doListStrategyArray;
-//      }
+	@Autowired
+	@Qualifier("first approach")
+//	@Qualifier
+	public void setDoListStrategy(ToDoListStrategy doListStrategy) {
+		this.doListStrategy = doListStrategy;
+	}
 
+	public List<Task> findCurrentToDoListArray(int idStrategy) {
+		return doListStrategyArray[idStrategy].creteToDoList();
+	}
 
+	public OtherStrategy getOtherStrategy() {
+		return otherStrategy;
+	}
+
+	@Autowired
+	public void setOtherStrategy(OtherStrategy otherStrategy) {
+		this.otherStrategy = otherStrategy;
+	}
+
+//	@Autowired
+	public void setDoListStrategyArray(ToDoListStrategy[] doListStrategyArray) {
+		this.doListStrategyArray = doListStrategyArray;
+	}
 
 }
-
