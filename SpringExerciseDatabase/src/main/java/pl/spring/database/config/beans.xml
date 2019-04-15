@@ -15,4 +15,9 @@ p:username="andrzej"
 p:password="1234"
 ></bean>
 
+<bean id="entityManager" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+p:dataSource-ref="dataSource"
+p:persistenceXmlLocation="classpath:/pl/spring/database/config/persistence.xml"
+></bean>
+
 </beans>

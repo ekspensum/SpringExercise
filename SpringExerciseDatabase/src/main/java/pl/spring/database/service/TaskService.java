@@ -13,6 +13,7 @@ import pl.spring.database.model.Task;
 public class TaskService {
 	
 	@Autowired
+	@RepositoryQualifier(type=RepositoryType.JDBC)
 	private TaskRepository repository;
 
 	public void addTask(String subject, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {		

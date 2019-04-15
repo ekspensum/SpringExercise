@@ -4,11 +4,23 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Task {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String subject;
+	@Column(name="dateStart")
 	private LocalDateTime dateTimeStart;
+	@Column(name="dateEnd")
 	private LocalDateTime dateTimeEnd;
 	
 	@Override
