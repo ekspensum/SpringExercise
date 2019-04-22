@@ -1,4 +1,4 @@
-package pl.spring.database.service;
+package pl.spring.database.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
-import pl.spring.database.model.Task;
+import pl.spring.database.service.RepositoryQualifier;
+import pl.spring.database.service.RepositoryType;
 
 @Repository
 @RepositoryQualifier(type=RepositoryType.JDBC)
@@ -47,7 +48,7 @@ public class JdbcTaskRepository implements TaskRepository {
 	 * @see pl.spring.database.service.TaskRepository#saveTaskSeconApproach(java.util.Map)
 	 */
 	@Override
-	public void saveTaskSeconApproach(Map<String, Object> propertiesMap) {
+	public void saveTaskSecondApproach(Map<String, Object> propertiesMap) {
 		taskInsert.execute(propertiesMap);
 	}
 	
