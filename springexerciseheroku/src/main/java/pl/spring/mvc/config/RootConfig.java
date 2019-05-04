@@ -1,5 +1,7 @@
-package pl.spring.aop.config;
+package pl.spring.mvc.config;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -7,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -16,18 +16,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
-@ComponentScan({"pl.spring.aop.model", "pl.spring.aop.service", "pl.spring.aop.aspects"})
-@PropertySource("classpath:/pl/spring/aop/config/database.properties")
+@ComponentScan(basePackages= {"pl.spring.mvc.service", "pl.spring.mvc.dao", "pl.spring.mvc.model"})
+@PropertySource(value="classpath:/pl/spring/mvc/config/database.properties")
 @EnableTransactionManagement
-@EnableAspectJAutoProxy //this annotation can be instead of aopconfig.xml with <aop:aspectj-autoproxy /> like below 
-//@EnableAspectJAutoProxy(proxyTargetClass=true)
-//@ImportResource(locations="/pl/spring/aop/config/aopconfig.xml")
-public class ConfigApp {
-
+public class RootConfig {
+	
 	@Autowired
 	private Environment env;
 	
@@ -35,7 +30,7 @@ public class ConfigApp {
 	 * With connection pool
 	 */
 	@Bean
-	public BasicDataSource basicDataSource() {
+	public BasicDataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setUrl(env.getProperty("url"));
 		dataSource.setDriverClassName(env.getProperty("driver"));
@@ -49,16 +44,36 @@ public class ConfigApp {
 		dataSource.setMaxActive(10);
 		return dataSource;
 	}
-	
+
+//    @Bean
+//    public BasicDataSource dataSource() throws URISyntaxException {
+//        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+//
+//        String username = dbUri.getUserInfo().split(":")[0];
+//        String password = dbUri.getUserInfo().split(":")[1];
+//        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
+//
+//        BasicDataSource basicDataSource = new BasicDataSource();
+//        basicDataSource.setUrl(dbUrl);
+//        basicDataSource.setUsername(username);
+//        basicDataSource.setPassword(password);
+//
+//        return basicDataSource;
+//    }
+    
+	/**
+	 * Below is alternative approach with JPA/Hibernate  
+	 * @throws URISyntaxException 
+	 */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws URISyntaxException {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
-        entityManager.setDataSource(basicDataSource());
+        entityManager.setDataSource(dataSource());
         entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManager.setPackagesToScan("pl.spring.aop.model");
+        entityManager.setPackagesToScan("pl.spring.mvc.model");
  
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         jpaProperties.setProperty("hibernate.show_sql", "false");
         jpaProperties.setProperty("hibernate.format_sql", "false");
         jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
@@ -70,14 +85,9 @@ public class ConfigApp {
     }
 	
 	   @Bean
-	   public PlatformTransactionManager transactionManager(){
+	   public PlatformTransactionManager transactionManager() throws URISyntaxException{
 	      JpaTransactionManager transactionManager = new JpaTransactionManager();
 	      transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 	      return transactionManager;
-	   }
-	   
-	   @Bean
-	   public Validator getValidator() {
-		   return new LocalValidatorFactoryBean();
 	   }
 }
