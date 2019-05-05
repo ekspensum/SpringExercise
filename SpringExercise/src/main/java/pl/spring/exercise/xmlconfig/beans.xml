@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<bean id="firstToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.FirstToDoListStrategy"></bean>
+<bean id="secondToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.SecondToDoListStrategy"></bean>
+<bean id="thirdToDoListStrategy" class="pl.spring.exercise.xmlconfig.service.ThirdToDoListStrategy"></bean>
+<bean id="taskService" class="pl.spring.exercise.xmlconfig.service.TaskService">
+	<property name="doListStrategies">
+		<list>
+			<ref bean="firstToDoListStrategy"/>
+			<ref bean="secondToDoListStrategy"/>
+			<ref bean="thirdToDoListStrategy"/>
+		</list>
+	</property>
+</bean>
+</beans>
