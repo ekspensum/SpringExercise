@@ -16,8 +16,11 @@ public class TaskService {
 	@Autowired
 	private TaskRepository taskRepository;
 	
-	public void addTask(Task task) {
-		taskRepository.saveTask(task);
+	public boolean addTask(Task task) {
+		if(taskRepository.saveTask(task)) {
+			return true;
+		}
+		return false;
 	}
 	
 	public List<Task> getAllTasks(){

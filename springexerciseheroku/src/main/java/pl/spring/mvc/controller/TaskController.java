@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,36 +27,37 @@ public class TaskController {
 
 	@Autowired
 	private TaskService taskService;
-	
+
 	@RequestMapping(path = "/taskForm", method = RequestMethod.GET)
 	public String showTaskForm(Model model) {
 		model.addAttribute("task", new Task());
 		return "taskForm";
 	}
-	
+
 	@RequestMapping(path = "/taskForm", method = RequestMethod.POST)
-	public String processTask(@Valid Task task, @RequestParam("image") MultipartFile file, BindingResult result) {
-		result.hasErrors();
+	public String processTask(@Valid Task task, BindingResult result, @Valid @RequestParam("image") MultipartFile file,
+			Model model) {
 		try {
-			task.setImage(file.getBytes());
-			if(!result.hasErrors()) {
-				taskService.addTask(task);
+			if (!result.hasErrors()) {
+				task.setImage(file.getBytes());
+				if (taskService.addTask(task)) {
+					model.addAttribute("alert","YES");
+				} else {
+					model.addAttribute("alert", "NO");
+				}
 			}
 		} catch (IOException e) {
-			result.hasErrors();
 			e.printStackTrace();
-		}	
-		return "redirect:/";
+		}
+		return "taskForm";
 	}
-	
+
 	@InitBinder
 	public void dataBinding(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		dateFormat.setLenient(false);
-//		binder.registerCustomEditor(Date.class, "dateTimeStart", new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	}
-	
 
 }

@@ -1,0 +1,18 @@
+body {
+    background-color:gray;
+    color:black;
+}
+.msg {
+	color: blue;
+	font-size: 16px;
+}
+.msgError {
+	color: orange;
+	font-size: 16px;	
+}
+.tableHomePage th {
+		border: 2px solid black;	
+}
+.tableHomePage td {
+		border: 1px solid black;	
+}

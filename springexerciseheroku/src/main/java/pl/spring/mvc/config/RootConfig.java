@@ -18,48 +18,48 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages= {"pl.spring.mvc.service", "pl.spring.mvc.dao", "pl.spring.mvc.model"})
-@PropertySource(value="classpath:/pl/spring/mvc/config/database.properties")
+@ComponentScan(basePackages= {"pl.spring.mvc.service", "pl.spring.mvc.dao"})
+//@PropertySource(value="classpath:/pl/spring/mvc/config/database.properties")
 @EnableTransactionManagement
 public class RootConfig {
 	
-	@Autowired
-	private Environment env;
-	
-	/**
-	 * With connection pool
-	 */
-	@Bean
-	public BasicDataSource dataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl(env.getProperty("url"));
-		dataSource.setDriverClassName(env.getProperty("driver"));
-		dataSource.setUsername(env.getProperty("user"));
-		dataSource.setPassword(env.getProperty("password"));
-//		if 0 then no limits
-		dataSource.setMaxOpenPreparedStatements(0);
-//		pool waiting to infinity: -1
-		dataSource.setMaxWait(3000);
-//		if 0 then no limits
-		dataSource.setMaxActive(10);
-		return dataSource;
-	}
+//	@Autowired
+//	private Environment env;
+//	
+//	/**
+//	 * With connection pool
+//	 */
+//	@Bean
+//	public BasicDataSource dataSource() {
+//		BasicDataSource dataSource = new BasicDataSource();
+//		dataSource.setUrl(env.getProperty("url"));
+//		dataSource.setDriverClassName(env.getProperty("driver"));
+//		dataSource.setUsername(env.getProperty("user"));
+//		dataSource.setPassword(env.getProperty("password"));
+////		if 0 then no limits
+//		dataSource.setMaxOpenPreparedStatements(0);
+////		pool waiting to infinity: -1
+//		dataSource.setMaxWait(3000);
+////		if 0 then no limits
+//		dataSource.setMaxActive(10);
+//		return dataSource;
+//	}
 
-//    @Bean
-//    public BasicDataSource dataSource() throws URISyntaxException {
-//        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-//
-//        String username = dbUri.getUserInfo().split(":")[0];
-//        String password = dbUri.getUserInfo().split(":")[1];
-//        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
-//
-//        BasicDataSource basicDataSource = new BasicDataSource();
-//        basicDataSource.setUrl(dbUrl);
-//        basicDataSource.setUsername(username);
-//        basicDataSource.setPassword(password);
-//
-//        return basicDataSource;
-//    }
+    @Bean
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?sslmode=require";
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
+    }
     
 	/**
 	 * Below is alternative approach with JPA/Hibernate  

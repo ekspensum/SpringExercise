@@ -45,7 +45,7 @@ public class Task {
 	@Min(value=1, message="Wartość musi być większa od zero")
 	private Integer taskNo;
 	
-//	@Max(value=2097152, message="Maxymlna wielkość pliku to 2097152 bajtów.")
+	@Size(min=0, max=100000, message="Maxymlna wielkość pliku to 100000 bajtów.")
 	private byte[] image;
 	
 	@Transient

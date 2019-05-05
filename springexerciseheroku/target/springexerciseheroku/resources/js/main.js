@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+function clearForms() {
+	alert("Kliknieto");
+}
