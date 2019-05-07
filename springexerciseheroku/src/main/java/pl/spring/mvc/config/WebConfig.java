@@ -1,8 +1,13 @@
 package pl.spring.mvc.config;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -29,11 +34,12 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	@Bean(name = "multipartResolver")
-	public CommonsMultipartResolver multipartResolver() {
+	public CommonsMultipartResolver multipartResolver() throws IOException {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-//	    Constraints below throw runtime error  
+//	    Constraints below must resolve Exception (throw runtime error) - see TaskController  
 //	    multipartResolver.setMaxUploadSizePerFile(100000);
 //	    multipartResolver.setMaxUploadSize(100000);
+//	    multipartResolver.setUploadTempDir(new FileSystemResource(System.getenv("TMP")));
 	    return multipartResolver;
 	}
 	

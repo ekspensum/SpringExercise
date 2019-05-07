@@ -27,7 +27,7 @@ public class DispatcherServlet extends AbstractAnnotationConfigDispatcherServlet
 
 //	@Override
 //	protected void customizeRegistration(Dynamic registration) {
-//		registration.setMultipartConfig(new MultipartConfigElement("/temp/spring/uploads", 2097152, 4194304, 0));
+//		registration.setMultipartConfig(new MultipartConfigElement(System.getenv("TMP"), 100000, 100000, 0));
 //	}
 
 }
