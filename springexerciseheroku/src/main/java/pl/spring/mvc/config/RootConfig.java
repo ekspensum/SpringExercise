@@ -23,8 +23,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages= {"pl.spring.mvc.service", "pl.spring.mvc.dao"})
-@PropertySource({"/resources/properties/database.properties", "/resources/properties/default.properties"})
+@ComponentScan(basePackages="pl.spring.mvc")
+@PropertySource({"/resources/properties/database.properties"})
 @EnableTransactionManagement
 public class RootConfig {
 	
