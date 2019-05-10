@@ -1,8 +1,6 @@
 package pl.spring.mvc.model;
 
-import java.time.LocalDateTime;
 import java.util.Base64;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,15 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Task {
@@ -28,25 +21,25 @@ public class Task {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Size(min=2, max=20, message="Ilość znaków powinna być pomiędzy 2 a 20")
-	@Pattern(regexp="^[^|'\":%^#~}{\\]\\[;=<>`]*$", message="Niedozwolony znak")
+	@Size(min=2, max=20)
+	@Pattern(regexp="^[^|'\":%^#~}{\\]\\[;=<>`]*$")
 	private String subject;
 	
 	@NotNull
-	@Future(message="Data i czas powinny mieć wartość przyszłą")
+	@Future
 //	@DateTimeFormat(iso=ISO.DATE_TIME)
 	private Date dateTimeStart;
 	
 	@NotNull
-	@Future(message="Data i czas powinny mieć wartość przyszłą")
+	@Future
 //	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateTimeEnd;
 	
 	@NotNull
-	@Min(value=1, message="Wartość musi być większa od zero")
+	@Min(value=1)
 	private Integer taskNo;
 	
-	@Size(min=0, max=100000, message="Maxymlna wielkość pliku to 100000 bajtów.")
+	@Size(min=0, max=100000)
 	private byte[] image;
 	
 	@Transient

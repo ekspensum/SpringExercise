@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +18,14 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
 
 import pl.spring.mvc.model.Task;
 import pl.spring.mvc.service.TaskService;
 
 @Controller
-@PropertySource(value="/resources/properties/default.properties")
+@PropertySource(value="/resources/properties/prompt.properties")
 public class TaskController {
 
 	@Autowired
@@ -47,8 +42,7 @@ public class TaskController {
 	}
 
 	@RequestMapping(path = "/taskForm", method = RequestMethod.POST)
-	public String processTask(@Valid Task task, BindingResult result, @Valid @RequestParam("image") MultipartFile file,
-			Model model) {
+	public String processTask(@Valid Task task, BindingResult result, @RequestParam("image") MultipartFile file, Model model) {
 		try {
 			if (!result.hasErrors()) {
 				task.setImage(file.getBytes());

@@ -17,13 +17,13 @@ import pl.spring.mvc.service.TaskService;
 public class HomeController {
 	
 	@Autowired
-	private TaskService task;
+	private TaskService taskService;
 
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("dateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
-		List<Task> taskList = task.getAllTasks();
+		List<Task> taskList = taskService.getAllTasks();
 		model.addAttribute("taskList", taskList);
 		return "index";
 	}

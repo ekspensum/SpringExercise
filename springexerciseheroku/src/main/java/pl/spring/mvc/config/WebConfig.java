@@ -2,16 +2,14 @@ package pl.spring.mvc.config;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -23,6 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @ComponentScan({"pl.spring.mvc.controller"})
 @EnableWebMvc
+//@PropertySource(value="/resources/properties/default.properties")
 public class WebConfig implements WebMvcConfigurer {
 
 	@Override
@@ -52,4 +51,16 @@ public class WebConfig implements WebMvcConfigurer {
 //    public MultipartResolver multipartResolver() {
 //        return new StandardServletMultipartResolver();
 //    }
+	
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer sourcesPlaceholderConfigurer() {
+//		return new PropertySourcesPlaceholderConfigurer();
+//	}
+//	
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("messages");
+        return messageSource;
+    }
 }

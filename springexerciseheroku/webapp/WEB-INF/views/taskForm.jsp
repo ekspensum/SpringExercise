@@ -18,7 +18,7 @@
 <!-- 	<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script> -->
 <!-- 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Task form</title>
 </head>
 <body>
 	<form:form modelAttribute="task" enctype="multipart/form-data">
@@ -46,8 +46,7 @@
 				</tr>
 				<tr>
 					<td>Image</td>
-					<td><form:input type="file" name="image" accept="image/*"
-							path="image" /></td>
+					<td><form:input type="file" name="image" accept="image/*" path="image" /></td>
 					<td><form:errors path="image" class="msgError" /></td>
 				</tr>
 				<tr>

@@ -31,13 +31,12 @@
 				</tr>
 				<tr>
 					<td>Date start</td>
-					<td><form:input path="dateTimeStart" /></td>
-					<td>Np. 219-01-01 00:30</td>
+					<td><form:input path="dateTimeStart" value="${dateTimePrompt}" onfocus="this.value=''" /></td>
 					<td><form:errors path="dateTimeStart" class="msgError" /></td>
 				</tr>
 				<tr>
 					<td>Date end</td>
-					<td><form:input path="dateTimeEnd" /></td>
+					<td><form:input path="dateTimeEnd" value="${dateTimePrompt}" onfocus="this.value=''" /></td>
 					<td><form:errors path="dateTimeEnd" class="msgError" /></td>
 				</tr>
 				<tr>
@@ -47,8 +46,7 @@
 				</tr>
 				<tr>
 					<td>Image</td>
-					<td><form:input type="file" name="image" accept="image/*"
-							path="image" /></td>
+					<td><form:input type="file" name="image" accept="image/*" path="image" /></td>
 					<td><form:errors path="image" class="msgError" /></td>
 				</tr>
 				<tr>
