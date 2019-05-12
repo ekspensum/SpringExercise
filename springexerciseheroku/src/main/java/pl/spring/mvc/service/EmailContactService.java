@@ -1,6 +1,7 @@
 package pl.spring.mvc.service;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -18,6 +19,7 @@ public class EmailContactService {
 	private String message;
 	
 	@Email
+	@NotEmpty
 	private String replyMail;
 	
 	public String getSubject() {

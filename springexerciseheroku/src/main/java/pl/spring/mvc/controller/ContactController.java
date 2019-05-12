@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.spring.mvc.service.EmailContactService;
-import pl.spring.mvc.service.SendEmailService;
+import pl.spring.mvc.service.SendEmail;
+import pl.spring.mvc.service.SendEmailGoogleService;
 
 @Controller
 @PropertySource(value="/static/properties/prompt.properties")
@@ -25,7 +26,7 @@ public class ContactController {
 	private EmailContactService emailContactService;
 	
 	@Autowired
-	private SendEmailService sendEmailService;
+	private SendEmail sendEmail;
 
 	@RequestMapping(path="/contact")
 	public String showContactPage(Model model) {
@@ -44,7 +45,7 @@ public class ContactController {
 				+ "Adres e-mail nadawcy: "+emailContactService.getReplyMail() + "\n"
 				+ "</font><br><br>";
 		if(!result.hasErrors()) {
-			if(sendEmailService.sendEmail("testjava55@gmail.com", emailContactService.getSubject(), mailText, emailContactService.getReplyMail())) {
+			if(sendEmail.sendEmail(env, "testjava55@gmail.com", emailContactService.getSubject(), mailText, emailContactService.getReplyMail())) {
 				model.addAttribute("alert","YES");
 			} else {
 				model.addAttribute("alert", "NO");
