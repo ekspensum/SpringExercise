@@ -25,7 +25,7 @@ import pl.spring.mvc.model.Task;
 import pl.spring.mvc.service.TaskService;
 
 @Controller
-@PropertySource(value="/resources/properties/prompt.properties")
+@PropertySource(value="/static/properties/prompt.properties")
 public class TaskController {
 
 	@Autowired

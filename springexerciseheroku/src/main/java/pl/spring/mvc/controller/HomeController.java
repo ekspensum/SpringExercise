@@ -1,7 +1,5 @@
 package pl.spring.mvc.controller;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +20,9 @@ public class HomeController {
 
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home(Model model) {
-		model.addAttribute("dateTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
 		List<Task> taskList = taskService.getAllTasks();
 		model.addAttribute("taskList", taskList);
-		return "index";
+		return "home";
 	}
 	
 

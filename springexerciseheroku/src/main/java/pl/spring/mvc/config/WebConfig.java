@@ -16,25 +16,27 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 
 @Configuration
 @ComponentScan({"pl.spring.mvc.controller"})
 @EnableWebMvc
-//@PropertySource(value="/resources/properties/default.properties")
+//@PropertySource(value="/static/properties/default.properties")
 public class WebConfig implements WebMvcConfigurer {
 
-	@Override
-	public void configureViewResolvers(ViewResolverRegistry registry) {
-		registry.jsp("/WEB-INF/views/", ".jsp");
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass(JstlView.class);
-		registry.viewResolver(viewResolver);
-	}
+//	@Override
+//	public void configureViewResolvers(ViewResolverRegistry registry) {
+//		registry.jsp("/WEB-INF/views/pages/", ".jsp");
+//		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//		viewResolver.setViewClass(JstlView.class);
+//		registry.viewResolver(viewResolver);
+//	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 	
 	@Bean(name = "multipartResolver")
@@ -63,4 +65,21 @@ public class WebConfig implements WebMvcConfigurer {
         messageSource.setBasename("messages");
         return messageSource;
     }
+    
+//    TILES
+    @Bean
+    public TilesConfigurer tilesConfigurer(){
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions(new String[] {"/WEB-INF/views/**/tiles.xml"});
+        tilesConfigurer.setCheckRefresh(true);
+        return tilesConfigurer;
+    }
+
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		TilesViewResolver tilesViewResolver = new TilesViewResolver();
+		registry.viewResolver(tilesViewResolver);
+	}
+    
+    
 }

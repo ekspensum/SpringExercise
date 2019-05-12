@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages="pl.spring.mvc")
-@PropertySource({"/resources/properties/database.properties"})
+@PropertySource(value="/static/properties/database.properties")
 @EnableTransactionManagement
 public class RootConfig {
 	
@@ -35,8 +35,8 @@ public class RootConfig {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setUrl(env.getProperty("url"));
 		dataSource.setDriverClassName(env.getProperty("driver"));
-		dataSource.setUsername(env.getProperty("user"));
-		dataSource.setPassword(env.getProperty("password"));
+		dataSource.setUsername(env.getProperty("db_user"));
+		dataSource.setPassword(env.getProperty("db_password"));
 //		if 0 then no limits
 		dataSource.setMaxOpenPreparedStatements(0);
 //		pool waiting to infinity: -1

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,19 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script type="text/javascript"
-	src='<c:url value="/resources/js/main.js" />'></script>
-<link href='<c:url value="/resources/css/sheet.css" />' style="text/css"
-	rel="stylesheet" media="all" />
-<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<!-- 	<link rel="stylesheet" href="http://code.ionicframework.com/1.0.0/css/ionic.css" /> -->
-<!-- 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> -->
-<!-- 	<script src="http://code.ionicframework.com/1.0.0/js/ionic.bundle.js"></script> -->
-<!-- 	<script src="http://code.jquery.com/jquery-2.0.1.min.js"></script> -->
-<!-- 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Task form</title>
 </head>
+<h2>Add task</h2>
 <body>
 	<form:form modelAttribute="task" enctype="multipart/form-data">
 		<table id="table-1">
@@ -31,12 +20,12 @@
 				</tr>
 				<tr>
 					<td>Date start</td>
-					<td><form:input path="dateTimeStart" value="${dateTimePrompt}" onfocus="this.value=''" /></td>
+					<td><form:input path="dateTimeStart" placeholder="${dateTimePrompt}" /></td>
 					<td><form:errors path="dateTimeStart" class="msgError" /></td>
 				</tr>
 				<tr>
 					<td>Date end</td>
-					<td><form:input path="dateTimeEnd" value="${dateTimePrompt}" onfocus="this.value=''" /></td>
+					<td><form:input path="dateTimeEnd" placeholder="${dateTimePrompt}" /></td>
 					<td><form:errors path="dateTimeEnd" class="msgError" /></td>
 				</tr>
 				<tr>
@@ -58,7 +47,6 @@
 	</form:form>
 	<br>
 	<br>
-	<a href="${pageContext.request.contextPath}/">Home</a>
 	<c:if test="${alert == 'YES' }">
 		<script>
 			taskAdded();
