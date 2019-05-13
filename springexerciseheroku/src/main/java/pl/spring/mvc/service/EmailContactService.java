@@ -22,6 +22,9 @@ public class EmailContactService {
 	@NotEmpty
 	private String replyMail;
 	
+	@Size(min=0, max=200000)
+	private byte[] attachment;
+	
 	public String getSubject() {
 		return subject;
 	}
@@ -39,6 +42,12 @@ public class EmailContactService {
 	}
 	public void setReplyMail(String replyMail) {
 		this.replyMail = replyMail;
+	}
+	public byte[] getAttachment() {
+		return attachment;
+	}
+	public void setAttachment(byte[] attachment) {
+		this.attachment = attachment;
 	}
 
 }

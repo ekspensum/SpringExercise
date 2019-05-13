@@ -2,51 +2,59 @@ package pl.spring.mvc.service;
 
 import java.util.Properties;
 
-import javax.mail.*;
 import javax.mail.internet.*;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.mail.MailException;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 @Service
 @PropertySource(value="/static/properties/mail.properties")
-//@Primary
+@Primary
 public class SendEmailGoogleService implements SendEmail {
-	
-    public boolean sendEmail(Environment env, String mailTo, String mailSubject, String mailText, String replyMail) {	
-    	
-    	Properties props = new Properties();
-        props.put("mail.smtp.auth", env.getProperty("mail.smtp.auth"));
-        props.put("mail.smtp.starttls.enable", env.getProperty("mail.smtp.starttls.enable"));
-        props.put("mail.smtp.host", env.getProperty("mail.smtp.host"));
-        props.put("mail.smtp.ssl.trust", env.getProperty("mail.smtp.ssl.trust"));
-        props.put("mail.smtp.port", env.getProperty("mail.smtp.port"));
 
-        Session session = Session.getInstance(props, new Authenticator() {
-	    	@Override
-	    	protected PasswordAuthentication getPasswordAuthentication() {
-		    	return new PasswordAuthentication(env.getProperty("mail_user"), env.getProperty("mail_password"));
-	    }
-		});
-        
-        MimeMessage msg = new MimeMessage(session);
-    	try {
-    		msg.setFrom(new InternetAddress(env.getProperty("mailFrom")));
-			msg.setRecipients(Message.RecipientType.TO, mailTo);
-			msg.setSubject(mailSubject);
-			msg.setText(mailText, "UTF-8", "html");
-			Address[] replyAddress = InternetAddress.parse(replyMail);
-			msg.setReplyTo(replyAddress);
-			msg.setSender(new InternetAddress(replyMail));
-			Transport.send(msg);
-			return true;
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+	@Override
+	public boolean sendEmail(Environment env, String mailTo, String mailSubject, String mailText, String replyMail, byte[] attachment, String fileName) {
+		
+		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+		javaMailSender.setHost(env.getProperty("mail.smtp.host"));
+		javaMailSender.setPort(Integer.valueOf(env.getProperty("mail.smtp.port")));
+		javaMailSender.setUsername(env.getProperty("mail_user"));
+		javaMailSender.setPassword(env.getProperty("mail_password"));
+
+		Properties javaMailProperties = new Properties();
+		javaMailProperties.put("mail.smtp.starttls.enable", env.getProperty("mail.smtp.starttls.enable"));
+		javaMailProperties.put("mail.smtp.auth", env.getProperty("mail.smtp.auth"));
+		javaMailProperties.put("mail.transport.protocol", env.getProperty("mail.transport.protocol"));
+//		javaMailProperties.put("mail.debug", env.getProperty("mail.debug"));
+
+		javaMailSender.setJavaMailProperties(javaMailProperties);
+		
+		MimeMessagePreparator messagePreparator = new MimeMessagePreparator() {
+			
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws Exception {
+                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                helper.setSubject(mailSubject);
+                helper.setFrom(replyMail);
+                helper.setTo(mailTo);
+                helper.setText(mailText);
+                helper.addAttachment(fileName, new ByteArrayResource(attachment));
+			}
+		};
+		try {
+			javaMailSender.send(messagePreparator);
+		} catch (MailException e) {
 			e.printStackTrace();
+			return false;
 		}
-    	return false;   	
-    }
-
+		return true;
+	}
+	
 }
