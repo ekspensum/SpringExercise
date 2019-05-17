@@ -1,15 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Task form</title>
-</head>
+<%@ include file="/WEB-INF/views/pages/taglibs.jsp"%>
+
 <h2>Add task</h2>
-<body>
 	<form:form modelAttribute="task" enctype="multipart/form-data">
 		<table id="table-1">
 			<tbody>
@@ -55,5 +46,3 @@
 	<c:if test="${alert == 'NO' }">
 		<script>alert("Did not added new task!");</script>
 	</c:if>
-</body>
-</html>

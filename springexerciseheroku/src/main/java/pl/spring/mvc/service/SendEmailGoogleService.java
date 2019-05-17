@@ -40,11 +40,11 @@ public class SendEmailGoogleService implements SendEmail {
 			
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
                 helper.setSubject(mailSubject);
                 helper.setFrom(replyMail);
                 helper.setTo(mailTo);
-                helper.setText(mailText);
+                helper.setText(mailText, true);
                 helper.addAttachment(fileName, new ByteArrayResource(attachment));
 			}
 		};

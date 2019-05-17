@@ -39,12 +39,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 	}
 	
-	@Bean(name = "multipartResolver")
+	@Bean
 	public CommonsMultipartResolver multipartResolver() throws IOException {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 //	    Constraints below must resolve Exception (throw runtime error) - see TaskController  
-//	    multipartResolver.setMaxUploadSizePerFile(100000);
-//	    multipartResolver.setMaxUploadSize(100000);
+	    multipartResolver.setMaxUploadSizePerFile(200000);
+	    multipartResolver.setMaxUploadSize(200000);
 //	    multipartResolver.setUploadTempDir(new FileSystemResource(System.getenv("TMP")));
 	    return multipartResolver;
 	}

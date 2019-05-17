@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Task {
 
@@ -27,12 +29,12 @@ public class Task {
 	
 	@NotNull
 	@Future
-//	@DateTimeFormat(iso=ISO.DATE_TIME)
+//	@DateTimeFormat(pattern = "yyyy-MM-dd' 'HH:mm")
 	private Date dateTimeStart;
 	
 	@NotNull
 	@Future
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(pattern = "yyyy-MM-dd' 'HH:mm")
 	private Date dateTimeEnd;
 	
 	@NotNull

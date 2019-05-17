@@ -46,8 +46,11 @@ public class ContactController {
 	@RequestMapping(path = "/contact", method = RequestMethod.POST)
 	public String sendMessage(@Valid EmailContactService emailContactService, BindingResult result,
 			@RequestParam("attachment") MultipartFile file, Model model) throws IOException {
-		String mailText = emailContactService.getMessage() + "\n\n\n" + "Adres e-mail nadawcy: "
-				+ emailContactService.getReplyMail() + "\n";
+			String mailText = "<font color='blue' size='3'>"
+							+ emailContactService.getMessage()
+							+ "<br><br><br>"
+							+ "Adres e-mail nadawcy: "+emailContactService.getReplyMail() + "\n"
+							+ "</font><br><br>";
 		if (!result.hasErrors()) {
 			if (sendEmail.sendEmail(env, "testjava55@gmail.com", emailContactService.getSubject(), mailText,
 					emailContactService.getReplyMail(), file.getBytes(), file.getOriginalFilename())) {
