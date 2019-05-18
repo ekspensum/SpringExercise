@@ -10,20 +10,17 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import pl.spring.mvc.service.EmailContactService;
 import pl.spring.mvc.service.SendEmail;
 
 @Controller
 @PropertySource(value = "/static/properties/prompt.properties")
-public class ContactController {
+public class ContactUsController {
 
 	@Autowired
 	private Environment env;
@@ -62,8 +59,4 @@ public class ContactController {
 		return "contact";
 	}
 
-	@InitBinder
-	public void dataBinding(WebDataBinder binder) {
-		binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
-	}
 }

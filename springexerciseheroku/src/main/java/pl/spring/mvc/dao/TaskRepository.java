@@ -2,7 +2,7 @@ package pl.spring.mvc.dao;
 
 import java.util.List;
 
-import pl.spring.mvc.model.Task;
+import pl.spring.mvc.entity.Task;
 
 public interface TaskRepository {
 

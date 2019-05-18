@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import pl.spring.mvc.model.Task;
+import pl.spring.mvc.entity.Task;
 import pl.spring.mvc.service.TaskService;
 
 @Controller

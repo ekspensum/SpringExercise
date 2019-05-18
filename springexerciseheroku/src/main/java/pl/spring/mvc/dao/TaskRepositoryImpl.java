@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.spring.mvc.model.Task;
+import pl.spring.mvc.entity.Task;
 
 @Repository
 public class TaskRepositoryImpl implements TaskRepository {

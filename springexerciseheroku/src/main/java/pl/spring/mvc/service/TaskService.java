@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pl.spring.mvc.dao.TaskRepository;
-import pl.spring.mvc.model.Task;
+import pl.spring.mvc.entity.Task;
 
 
 @Service

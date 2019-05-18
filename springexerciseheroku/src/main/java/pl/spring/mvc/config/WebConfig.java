@@ -43,8 +43,10 @@ public class WebConfig implements WebMvcConfigurer {
 	public CommonsMultipartResolver multipartResolver() throws IOException {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 //	    Constraints below must resolve Exception (throw runtime error) - see TaskController  
-	    multipartResolver.setMaxUploadSizePerFile(200000);
-	    multipartResolver.setMaxUploadSize(200000);
+//	    multipartResolver.setMaxUploadSizePerFile(200000);
+//	    multipartResolver.setMaxUploadSize(200000);
+	    
+//	    Not to use on Heroku cloud
 //	    multipartResolver.setUploadTempDir(new FileSystemResource(System.getenv("TMP")));
 	    return multipartResolver;
 	}

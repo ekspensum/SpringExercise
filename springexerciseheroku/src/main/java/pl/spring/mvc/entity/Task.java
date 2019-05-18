@@ -1,4 +1,4 @@
-package pl.spring.mvc.model;
+package pl.spring.mvc.entity;
 
 import java.util.Base64;
 import java.util.Date;
