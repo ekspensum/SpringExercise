@@ -1,6 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/pages/taglibs.jsp"%>
 
-<h2>Contact Us Page</h2>
+<h3>Kontakt z nami</h3>
 <form:form modelAttribute="emailContactService" id="contactForm" enctype="multipart/form-data" >
 	<p>
 	<form:input id="subject" path="subject" placeholder="${subjectPrompt}" style="width:250px" />

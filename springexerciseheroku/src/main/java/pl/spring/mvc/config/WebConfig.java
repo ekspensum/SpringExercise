@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 @Configuration
 @ComponentScan({"pl.spring.mvc.controller"})
 @EnableWebMvc
+@Import({SecurityConfig.class})
 //@PropertySource(value="/static/properties/default.properties")
 public class WebConfig implements WebMvcConfigurer {
 
