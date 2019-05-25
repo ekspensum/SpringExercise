@@ -31,7 +31,7 @@ public class AdviceController {
 	
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public String handleMaxUploadSizeExceededException(Model model) {
-		model.addAttribute("msgExceedSizeFile", env.getProperty("msgExceedSizeFile"));
+		model.addAttribute("exeption", env.getProperty("msgExceedSizeFile"));
 		return "handleError";
 	}
 	

@@ -29,6 +29,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Task> readAllTasks() {
 		return entityManager.createQuery("from Task").getResultList();

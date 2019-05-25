@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/pages/taglibs.jsp"%>
 
-<h2>Dodaj zadanie</h2>
+<h3>Dodaj zadanie</h3>
 	<form:form modelAttribute="task" enctype="multipart/form-data">
 		<table id="table-1">
 			<tbody>

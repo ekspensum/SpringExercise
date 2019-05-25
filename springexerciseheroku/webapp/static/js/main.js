@@ -57,3 +57,12 @@ function validateLoginForm() {
         return false;
     }
 }
+
+function userAdded(){
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("firstName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("email").value = "";
+    alert("New user was added!");
+}

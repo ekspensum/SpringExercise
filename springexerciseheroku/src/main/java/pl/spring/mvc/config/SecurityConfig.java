@@ -1,31 +1,37 @@
 package pl.spring.mvc.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	DataSource dataSource;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
+		.jdbcAuthentication()
+		.dataSource(dataSource)
+		.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?")
+		.authoritiesByUsernameQuery("SELECT username, role FROM public.users_roles INNER JOIN users ON users_roles.users_id = users.id INNER JOIN roles ON users_roles.roles_id = roles.id WHERE username=?")
+		.passwordEncoder(new BCryptPasswordEncoder())
+		.and()
 		.inMemoryAuthentication()
 		.passwordEncoder(new BCryptPasswordEncoder())
-		.withUser("admin")
-		.password(new BCryptPasswordEncoder().encode("admin"))
-		.roles("ADMIN")
-		.and()
-		.withUser("user")
-		.password(new BCryptPasswordEncoder().encode("user"))
-		.roles("USER");
+		.withUser("owner")
+		.password(new BCryptPasswordEncoder().encode("owner"))
+		.roles("ADMIN");
 	}
 
 	@Override
@@ -34,7 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()
 		.authorizeRequests()
 		.mvcMatchers("/taskForm")
+		.hasRole("USER")
+		.mvcMatchers("/register")
 		.hasRole("ADMIN")
+		.mvcMatchers("/taskForm")
+		.hasRole("EMPLOYEE")
 		.and()
 		.formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/login?error")
 		.and()
