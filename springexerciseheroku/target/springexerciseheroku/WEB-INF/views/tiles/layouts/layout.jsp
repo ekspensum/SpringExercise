@@ -19,7 +19,6 @@
              
         <section id="content">
             <tiles:insertAttribute name="body" />
-<%--             <tiles:insertAttribute name="belt" ignore="true"/> --%>
         </section>
          
         <footer id="footer">

@@ -24,14 +24,14 @@ public class AdviceController {
 	private Environment env;
 
 	@ExceptionHandler(Exception.class)
-	public String handleException(Model model) {
-		model.addAttribute("exception", "Wystapił wyjątek");
+	public String handleException(Model model, Exception e) {
+		model.addAttribute("exception", "Wystapił wyjątek: "+e);
 		return "handleError";
 	}
 	
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public String handleMaxUploadSizeExceededException(Model model) {
-		model.addAttribute("exeption", env.getProperty("msgExceedSizeFile"));
+		model.addAttribute("exception", env.getProperty("msgExceedSizeFile"));
 		return "handleError";
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.spring.mvc.entity.Task;
 import pl.spring.mvc.service.TaskService;
@@ -25,6 +26,11 @@ public class HomeController {
 		return "home";
 	}
 	
-
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	public String home(@RequestParam("sortBy") String sortBy, Model model) {
+		List<Task> taskList = taskService.getAllTasks(sortBy);
+		model.addAttribute("taskList", taskList);
+		return "home";
+	}
 }
 
